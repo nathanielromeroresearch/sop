@@ -295,7 +295,21 @@ def select_token_file():
     else:
         rp(f"{R}Invalid choice. Defaulting to page.txt.")
         return TOKEN_FILES['tokens']
-        
+def set_delay():
+    global delay_enabled
+    rp(pan(f"{Y}Set delays for actions (in seconds):",
+           title=f"{Y}Set Delay",
+           border_style="bold yellow"))
+    for action in delay_enabled:
+        try:
+            delay = int(input(f"{Y}Enter delay for {action} (0 for no delay): "))
+            if delay < 0:
+                rp(f"{R}Delay must be a non-negative integer.")
+            else:
+                delay_enabled[action] = delay
+        except ValueError:
+            rp(f"{R}Invalid input. Please enter an integer.")
+                    
 def auto_transfer_tokens():
     clear_console()
     logo()
